@@ -66,7 +66,6 @@ const FolderContextProvider = (props) => {
       return ["/", "Root"];
     }
     arr.push("/", "Root");
-    console.log("curren Folder Name == ", currentFolder.name);
 
     const tempArr = [];
     tempArr.push(currentFolder.name);

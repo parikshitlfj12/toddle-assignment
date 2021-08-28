@@ -16,6 +16,7 @@ function App() {
         <FileContextProvider>
           <Switch>
             <Route exact path="/" component={rootDashboard} />
+            <Route exact path="/folder/null" component={rootDashboard} />
             <Route exact path="/folder/:folderId" component={rootDashboard} />
             <Route>
               <h1>No Page Found</h1>

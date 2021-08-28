@@ -12,8 +12,6 @@ import NavbarComponent from "../components/Navbar";
 import { FolderContext } from "../contexts/FolderContext";
 
 export default function Dashboard() {
-  
-
   const { folderId } = useParams();
   const { getCurrentFolder } = useContext(FolderContext);
   const [currentFolder, setCurrentFolder] = useState({});

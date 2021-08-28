@@ -10,11 +10,11 @@ export default function AddFolder({parentFolder}) {
   const [name, setName] = useState("");
   const [buttonActive, setButtonActive] = useState(false);
 
-  useEffect(() => {
-    if(parentFolder.parentId === null){
-      setButtonActive(false);
-    }
-  }, [parentFolder.parentId, parentFolder])
+  // useEffect(() => {
+  //   if(parentFolder.parentId === null){
+  //     setButtonActive(false);
+  //   }
+  // }, [parentFolder.parentId, parentFolder])
   
 
   function openModal() {

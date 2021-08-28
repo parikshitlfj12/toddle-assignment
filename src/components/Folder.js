@@ -19,7 +19,7 @@ export default function Folder({parentFolder}) {
     setBreadCrumbItems(getBreadCrumb(parentFolder));
   }, [getFoldersForAPage, folderId, getBreadCrumb, parentFolder]);
 
-  const { removeFolder } = useContext(FolderContext);
+  const { removeFolder, getCurrentFolder } = useContext(FolderContext);
   const history = useHistory();
 
   const handleRemove = (folderId) => {
@@ -27,10 +27,19 @@ export default function Folder({parentFolder}) {
     history.push(`/folder/${parentFolder.folderId}`);
   };
 
+  const handleBack = () => {
+    const current = getCurrentFolder(folderId);
+    history.push(`/folder/${current.parentId}`)
+  }
+
+  const handleNavigate = (id) => {
+    history.push(`/folder/${id}`)
+  }
+
   return currentPageFolders.length ? (
     <section>
       <Breadcrumb>
-        <HiBackspace fontSize="25px" style={{marginRight: "20px"}}/>
+        <HiBackspace onClick={handleBack} fontSize="25px" style={{marginRight: "20px", cursor: "pointer"}}/>
         {breadCrumbItems.map(item => {
           return(
             <Breadcrumb.Item key={item} style={{fontSize: "18px"}}>{item}</Breadcrumb.Item>
@@ -47,24 +56,23 @@ export default function Folder({parentFolder}) {
             style={{
               border: "2px solid black",
               display: "inline",
-              padding: "12px 5px",
+              padding: "8px 14px 8px 5px",
               borderRadius: "5px",
               margin: "2px",
             }}
           >
-            <Button
-              style={{ border: "none" }}
-              to={`/folder/${folder.folderId}`}
-              as={Link}
+            <span
+              onDoubleClick={() => {handleNavigate(folder.folderId)}}
+              style={{ border: "none", cursor:"pointer" }}
               variant="outline-dark"
               className="text-truncate m-2"
             >
               <AiFillFolder fontSize="30px" style={{ margin: "2px 6px" }} />
               {folder.name}
-            </Button>
+            </span>
             <span
               style={{
-                marginLeft: "-4px",
+                marginLeft: "6px",
                 fontSize: "20px",
                 cursor: "pointer",
               }}
@@ -81,7 +89,8 @@ export default function Folder({parentFolder}) {
   ) : (
     <div>
       <Breadcrumb>
-        <HiBackspace fontSize="25px" style={{marginRight: "20px"}}/>
+        <HiBackspace onClick={handleBack} fontSize="25px" style={{marginRight: "20px"}}/>
+        
         {breadCrumbItems.map(item => {
           return(
             <Breadcrumb.Item key={item} style={{fontSize: "18px"}}>{item}</Breadcrumb.Item>
