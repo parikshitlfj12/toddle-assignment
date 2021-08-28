@@ -3,7 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { AiFillFileText } from "react-icons/ai";
 import { FileContext } from "../contexts/FileContext";
 
-export default function AddFile({ currentFolder }) {  
+export default function AddFile({ parentFolder }) {  
   const {addFile} = useContext(FileContext);
 
 
@@ -23,7 +23,7 @@ export default function AddFile({ currentFolder }) {
 
     // Adding a folder in Context API, Two Central Store 
     // Folders and Files
-    const currentFolderId = "nasdj";
+    const currentFolderId = parentFolder.folderId;
     addFile(name, ext, currentFolderId);
     setName("");
     setExt("");

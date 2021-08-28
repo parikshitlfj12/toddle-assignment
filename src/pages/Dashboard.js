@@ -32,7 +32,7 @@ export default function Dashboard() {
           </Col>
           <Col xs={2} style={{ textAlign: "right" }}>
             <AddFolder parentFolder={currentFolder}/>
-            <AddFile />
+            <AddFile parentFolder={currentFolder}/>
           </Col>
         </Row>
       </Container>
