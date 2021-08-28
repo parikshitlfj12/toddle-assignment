@@ -1,34 +1,67 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { AiFillFolder } from "react-icons/ai";
 import { Button } from "react-bootstrap";
 import { FolderContext } from "../contexts/FolderContext";
 import { MdCancel } from "react-icons/md";
+import { useParams } from "react-router";
 
-export default function Folder() {
-  const { folders, removeFolder } = useContext(FolderContext);
+export default function Folder({parentFolder}) {
+  const { folderId } = useParams();
+  const { getFoldersForAPage } = useContext(FolderContext);
+  const [currentPageFolders, setcurrentPageFolders] = useState([]);
 
-   const handleRemove = (folderId) => {
+  useEffect(() => {
+    setcurrentPageFolders(getFoldersForAPage(folderId))
+  }, [getFoldersForAPage, folderId])
+
+  const { removeFolder } = useContext(FolderContext);
+  const history = useHistory();
+
+  const handleRemove = (folderId) => {
     removeFolder(folderId);
-   }
+    history.push(`/folder/${parentFolder.folderId}`);
+  };
 
-  return folders.length ? (
+  return currentPageFolders.length ? (
     <section>
-      {folders.map((folder) => {
+      Current Folder - {parentFolder.name}
+      <br/>
+      {currentPageFolders.map((folder) => {
         return (
-          <Button
+          <div
             key={folder.folderId}
-            to={`/folder/${folder.folderId}`}
-            as={Link}
-            variant="outline-dark"
-            className="text-truncate m-2"
+            style={{
+              border: "2px solid black",
+              display: "inline",
+              padding: "12px 5px",
+              borderRadius: "5px",
+              margin: "2px",
+            }}
           >
-            <AiFillFolder fontSize="30px" style={{ margin: "2px 6px" }} />
-            {folder.name}
-            <span style={{marginLeft: "15px", fontSize: "20px"}} onClick={() => {handleRemove(folder.folderId)}}>
+            <Button
+              style={{ border: "none" }}
+              to={`/folder/${folder.folderId}`}
+              as={Link}
+              variant="outline-dark"
+              className="text-truncate m-2"
+            >
+              <AiFillFolder fontSize="30px" style={{ margin: "2px 6px" }} />
+              {folder.name}
+            </Button>
+            <span
+              style={{
+                marginLeft: "-4px",
+                fontSize: "20px",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                handleRemove(folder.folderId);
+              }}
+            >
               <MdCancel />
             </span>
-          </Button>
+          </div>
         );
       })}
     </section>

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AiFillFileText } from "react-icons/ai"
-import { Button } from "react-bootstrap";
 import { MdCancel } from "react-icons/md";
 import {FileContext} from "../contexts/FileContext"
 

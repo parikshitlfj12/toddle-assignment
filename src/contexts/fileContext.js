@@ -30,8 +30,6 @@ const  FileContextProvider = (props) => {
   }
 
   const removeFile = (fileId) => {
-    console.log(fileId);
-    console.log(files)
     setFiles(files.filter(file => {
       return (file.fileId !== fileId);
     }))
