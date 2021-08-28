@@ -32,7 +32,7 @@ const FolderContextProvider = (props) => {
     },
     {
       name: "5",
-      folderId: "6nqkjwsa",
+      folderId: "5nqkjwsa",
       parentId: "63211",
     },
     {
@@ -42,7 +42,7 @@ const FolderContextProvider = (props) => {
     },
     {
       name: "8",
-      folderId: "63211",
+      folderId: "8ajshbd",
       parentId: "3kfnsn",
     },
     {
@@ -76,16 +76,11 @@ const FolderContextProvider = (props) => {
       return ["/", "Root"];
     }
     arr.push("/", "Root");
-
     const tempArr = [];
     tempArr.push(currentFolder.name);
-
-    
     let parent = folders.filter(fold => {
       return (fold.folderId === currentFolder.parentId)
     })[0]
-
-    
     while (parent.parentId !== null) {
       tempArr.push(parent.name);
       let newParent = folders.filter(fold => {
@@ -93,7 +88,6 @@ const FolderContextProvider = (props) => {
       })[0]
       parent = newParent;
     }
-
     var rev = tempArr.reverse(); 
     rev.forEach(one => {
       arr.push(one)
@@ -130,11 +124,34 @@ const FolderContextProvider = (props) => {
   };
 
   const removeFolder = (folderId) => {
-    setFolders(
-      folders.filter((fol) => {
-        return fol.folderId !== folderId;
+    let folderIds = [];
+    let folderToRemove = folders.filter((fol) => {
+      return fol.folderId === folderId;
+    })[0];
+    let foldersToRemove = folders.filter((fol) => {
+      return fol.parentId === folderToRemove.folderId;
+    });
+
+    foldersToRemove = [...foldersToRemove, folderToRemove]
+    folderIds = foldersToRemove.map(folder => {
+      return folder.folderId;
+    })
+    
+    
+    const reNewed = folders.filter((fol) => {
+      let flag = 0;
+      folderIds.forEach(eachFolderId => {
+        if(eachFolderId === fol.folderId){
+          console.log("Found A Dolder Id", eachFolderId);
+          flag = 1;
+          return false;
+        }
       })
-    );
+      return flag === 1 ? false  : true;
+    })
+    console.log(reNewed)
+
+    setFolders(reNewed);
   };
   return (
     <FolderContext.Provider
