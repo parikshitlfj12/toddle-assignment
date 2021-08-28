@@ -20,9 +20,6 @@ export default function AddFile({ parentFolder }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    // Adding a folder in Context API, Two Central Store 
-    // Folders and Files
     const currentFolderId = parentFolder.folderId;
     addFile(name, ext, currentFolderId);
     setName("");

@@ -25,6 +25,16 @@ const FileContextProvider = (props) => {
     },
   ]);
 
+  const renameFile = (fileId, newName) => {
+    const newArray = files.map(oneFile => {
+      if(oneFile.fileId === fileId) {
+        oneFile.name = newName;
+      }
+      return oneFile;
+    }) 
+    setFiles(newArray);  
+  }
+
   const getFileForPage = (folderId) => {
     const returnFiles = files.filter((file) => {
       return file.folderId === folderId;
@@ -48,7 +58,7 @@ const FileContextProvider = (props) => {
 
   return (
     <FileContext.Provider
-      value={{ files, addFile, removeFile, getFileForPage}}
+      value={{ files, addFile, removeFile, getFileForPage, renameFile}}
     >
       {props.children}
     </FileContext.Provider>
