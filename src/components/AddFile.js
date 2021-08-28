@@ -1,14 +1,15 @@
 import React, { useState, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-import { AiFillFolderAdd } from "react-icons/ai";
-import { FolderContext } from "../contexts/FolderContext";
+import { AiFillFileText } from "react-icons/ai";
+import { FileContext } from "../contexts/FileContext";
 
-export default function AddFolder({ currentFolder }) {
-  const { folders, addFolder, removeFolder } = useContext(FolderContext);
-  const parentId = "kajdasd"
+export default function AddFile({ currentFolder }) {  
+  const {addFile} = useContext(FileContext);
+
 
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
+  const [ext, setExt] = useState("");
 
   function openModal() {
     setOpen(true);
@@ -22,27 +23,35 @@ export default function AddFolder({ currentFolder }) {
 
     // Adding a folder in Context API, Two Central Store 
     // Folders and Files
-    addFolder(name, parentId);
-    
+    const currentFolderId = "nasdj";
+    addFile(name, ext, currentFolderId);
     setName("");
+    setExt("");
     closeModal();
   }
 
   return (
-    <section style={{display: "inline", margin: "0px 10px"}}>
+    <section style={{display: "inline"}}>
       <Button onClick={openModal} className="mt-3" variant="outline-danger">
-        <AiFillFolderAdd fontSize="25px" />
+        <AiFillFileText fontSize="25px" />
       </Button>
       <Modal show={open} onHide={closeModal}>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group>
-              <Form.Label>Folder Name</Form.Label>
+              <Form.Label>File Name</Form.Label>
               <Form.Control
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+              />
+              <Form.Label style={{marginTop: "20px"}}>File Ext</Form.Label>
+              <Form.Control
+                type="text"
+                required
+                value={ext}
+                onChange={(e) => setExt(e.target.value)}
               />
             </Form.Group>
           </Modal.Body>
@@ -51,7 +60,7 @@ export default function AddFolder({ currentFolder }) {
               Close
             </Button>
             <Button variant="success" type="submit">
-              Add Folder
+              Add File
             </Button>
           </Modal.Footer>
         </Form>

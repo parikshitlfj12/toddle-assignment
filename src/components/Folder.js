@@ -16,7 +16,7 @@ export default function Folder() {
     <section>
       {folders.map((folder) => {
         return (
-          <span
+          <Button
             key={folder.folderId}
             to={`/folder/${folder.folderId}`}
             as={Link}
@@ -28,7 +28,7 @@ export default function Folder() {
             <span style={{marginLeft: "15px", fontSize: "20px"}} onClick={() => {handleRemove(folder.folderId)}}>
               <MdCancel />
             </span>
-          </span>
+          </Button>
         );
       })}
     </section>
