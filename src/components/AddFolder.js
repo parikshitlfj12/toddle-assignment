@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { AiFillFolderAdd } from "react-icons/ai";
+import { FolderContext } from "../contexts/FolderContext";
 
 export default function AddFolder({ currentFolder }) {
+  const { folders, addFolder, removeFolder } = useContext(FolderContext);
+  const parentId = "kajdasd"
+
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
 
@@ -18,18 +22,14 @@ export default function AddFolder({ currentFolder }) {
 
     // Adding a folder in Context API, Two Central Store 
     // Folders and Files
-    const sampleFolder = {
-      name: name,
-      parentId: currentFolder.id,
-      path: ""
-    }
-
+    addFolder(name, parentId);
+    
     setName("");
     closeModal();
   }
 
   return (
-    <>
+    <section>
       <Button onClick={openModal} className="mt-3" variant="outline-danger">
         <AiFillFolderAdd fontSize="25px" />
       </Button>
@@ -56,6 +56,6 @@ export default function AddFolder({ currentFolder }) {
           </Modal.Footer>
         </Form>
       </Modal>
-    </>
+    </section>
   );
 }
