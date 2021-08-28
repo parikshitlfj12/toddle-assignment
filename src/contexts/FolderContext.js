@@ -83,6 +83,7 @@ const FolderContextProvider = (props) => {
     })[0]
     while (parent.parentId !== null) {
       tempArr.push(parent.name);
+      // eslint-disable-next-line no-loop-func
       let newParent = folders.filter(fold => {
         return (fold.folderId === parent.parentId)
       })[0]

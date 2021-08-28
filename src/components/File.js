@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AiFillFileText } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import { FileContext } from "../contexts/FileContext";
 import { Modal, Form, Button } from "react-bootstrap";
@@ -47,7 +46,7 @@ export default function File() {
     <section>
       {files.map((oneFile) => {
         return (
-          <span>
+          <span key={oneFile.fileId}>
             <span
               onContextMenu={(e) => {
                 handleRightClick(e, oneFile);

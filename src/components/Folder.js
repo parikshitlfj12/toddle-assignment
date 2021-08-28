@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { AiFillFolder } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 import { FolderContext } from "../contexts/FolderContext";
 import { MdCancel } from "react-icons/md";
@@ -8,11 +7,14 @@ import { useParams } from "react-router";
 import { Breadcrumb } from "react-bootstrap";
 import { HiBackspace } from "react-icons/hi";
 import folderImage from "../assets/img/folder.png";
+import "../assets/styles/folder.css";
 
 export default function Folder({ parentFolder }) {
+
+
+  // Data
   const { folderId } = useParams();
-  const { getFoldersForAPage, getBreadCrumb, renameFolder } =
-    useContext(FolderContext);
+  const { getFoldersForAPage, getBreadCrumb, renameFolder } = useContext(FolderContext);
   const [currentPageFolders, setcurrentPageFolders] = useState([]);
   const [breadCrumbItems, setBreadCrumbItems] = useState([]);
   const [open, setOpen] = useState(false);
@@ -26,6 +28,10 @@ export default function Folder({ parentFolder }) {
     setBreadCrumbItems(getBreadCrumb(parentFolder));
   }, [getFoldersForAPage, folderId, getBreadCrumb, parentFolder]);
 
+
+
+
+  // Functions
   function openModal() {
     setOpen(true);
   }
@@ -61,6 +67,10 @@ export default function Folder({ parentFolder }) {
     setRenameId(folder.folderId);
   };
 
+
+
+
+  // Return
   return currentPageFolders.length ? (
     <section>
       <Breadcrumb>
@@ -71,7 +81,7 @@ export default function Folder({ parentFolder }) {
         />
         {breadCrumbItems.map((item) => {
           return (
-            <Breadcrumb.Item key={item} style={{ fontSize: "18px" }}>
+            <Breadcrumb.Item key={item} className="style-breadcrumb-items">
               {item}
             </Breadcrumb.Item>
           );
@@ -79,7 +89,6 @@ export default function Folder({ parentFolder }) {
       </Breadcrumb>
 
       <br />
-      
       {currentPageFolders.map((folder) => {
         return (
           <span key={folder.folderId}>
@@ -153,12 +162,11 @@ export default function Folder({ parentFolder }) {
         <HiBackspace
           onClick={handleBack}
           fontSize="25px"
-          style={{ marginRight: "20px" }}
+          style={{ marginRight: "20px", cursor: "pointer" }}
         />
-
         {breadCrumbItems.map((item) => {
           return (
-            <Breadcrumb.Item key={item} style={{ fontSize: "18px" }}>
+            <Breadcrumb.Item key={item} className="style-breadcrumb">
               {item}
             </Breadcrumb.Item>
           );
