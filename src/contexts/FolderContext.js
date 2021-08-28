@@ -67,23 +67,28 @@ const FolderContextProvider = (props) => {
     }
     arr.push("/", "Root");
     console.log("curren Folder Name == ", currentFolder.name);
-    arr.push(currentFolder.name);
+
+    const tempArr = [];
+    tempArr.push(currentFolder.name);
 
     
     let parent = folders.filter(fold => {
       return (fold.folderId === currentFolder.parentId)
     })[0]
 
-    console.log("parent  = ", parent.name)
-
+    
     while (parent.name !== "Root") {
-      arr.push(parent.name);
+      tempArr.push(parent.name);
       let newParent = folders.filter(fold => {
         return (fold.folderId === parent.parentId)
       })[0]
       parent = newParent;
     }
-    
+
+    var rev = tempArr.reverse(); 
+    rev.forEach(one => {
+      arr.push(one)
+    }) ;
     return arr;
   };
 

@@ -6,6 +6,7 @@ import { FolderContext } from "../contexts/FolderContext";
 import { MdCancel } from "react-icons/md";
 import { useParams } from "react-router";
 import { Breadcrumb } from "react-bootstrap";
+import { HiBackspace } from "react-icons/hi"
 
 export default function Folder({parentFolder}) {
   const { folderId } = useParams();
@@ -16,7 +17,7 @@ export default function Folder({parentFolder}) {
   useEffect(() => {
     setcurrentPageFolders(getFoldersForAPage(folderId));
     setBreadCrumbItems(getBreadCrumb(parentFolder));
-  }, [getFoldersForAPage, folderId, getBreadCrumb, parentFolder])
+  }, [getFoldersForAPage, folderId, getBreadCrumb, parentFolder]);
 
   const { removeFolder } = useContext(FolderContext);
   const history = useHistory();
@@ -29,13 +30,15 @@ export default function Folder({parentFolder}) {
   return currentPageFolders.length ? (
     <section>
       <Breadcrumb>
+        <HiBackspace fontSize="25px" style={{marginRight: "20px"}}/>
         {breadCrumbItems.map(item => {
           return(
-            <Breadcrumb.Item href="#">{item}</Breadcrumb.Item>
+            <Breadcrumb.Item key={item} style={{fontSize: "18px"}}>{item}</Breadcrumb.Item>
           )
         })}
         
       </Breadcrumb>
+      
       <br/>
       {currentPageFolders.map((folder) => {
         return (
@@ -76,6 +79,18 @@ export default function Folder({parentFolder}) {
       })}
     </section>
   ) : (
-    <div>No Folders</div>
+    <div>
+      <Breadcrumb>
+        <HiBackspace fontSize="25px" style={{marginRight: "20px"}}/>
+        {breadCrumbItems.map(item => {
+          return(
+            <Breadcrumb.Item key={item} style={{fontSize: "18px"}}>{item}</Breadcrumb.Item>
+          )
+        })}
+        
+      </Breadcrumb>
+      <div className="mt-5">No Folders</div>
+      
+    </div>
   );
 }
