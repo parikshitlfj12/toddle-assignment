@@ -28,7 +28,7 @@ export default function Dashboard() {
           <Col xs={10}>
             <Folder parentFolder={currentFolder}/>
             <hr />
-            <File/>
+            <File />
           </Col>
           <Col xs={2} style={{ textAlign: "right" }}>
             <AddFolder parentFolder={currentFolder}/>

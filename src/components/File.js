@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AiFillFileText } from "react-icons/ai"
+import { AiFillFileText } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
-import {FileContext} from "../contexts/FileContext"
+import { FileContext } from "../contexts/FileContext";
 import { Modal, Form, Button } from "react-bootstrap";
+import fileImage from "../assets/img/file.png";
 
 export default function File() {
   const { removeFile, getFileForPage, renameFile } = useContext(FileContext);
@@ -15,32 +16,32 @@ export default function File() {
 
   useEffect(() => {
     setFiles(getFileForPage(folderId));
-  }, [getFileForPage, folderId])
+  }, [getFileForPage, folderId]);
 
   const handleRemove = (fileId) => {
     removeFile(fileId);
-  }
+  };
 
   const handleRightClick = (e, file) => {
     e.preventDefault();
     openModal();
     setNewName(file.name);
     setRenameId(file.fileId);
-  }
-  
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     renameFile(renameId, newName);
-    console.log(renameId, newName)
+    console.log(renameId, newName);
     setNewName("");
     closeModal();
-  }
+  };
   const closeModal = () => {
     setOpen(false);
-  }
+  };
   const openModal = () => {
     setOpen(true);
-  }
+  };
 
   return files.length ? (
     <section>
@@ -48,15 +49,25 @@ export default function File() {
         return (
           <span>
             <span
-              onContextMenu={(e) => {handleRightClick(e, oneFile);}}
+              onContextMenu={(e) => {
+                handleRightClick(e, oneFile);
+              }}
               key={oneFile.fileId}
               as={Link}
               variant="outline-dark"
               className="text-truncate m-2"
             >
-              <AiFillFileText fontSize="30px" style={{ margin: "2px 6px" }} />
-              {oneFile.name}.<small>{oneFile.ext}</small>. <b>{oneFile.folderId}</b>
-              <span style={{marginLeft: "15px", fontSize: "20px"}} onClick={() => {handleRemove(oneFile.fileId)}}>
+              <img src={fileImage} alt="File" width="5%" />
+              <span style={{paddingLeft: "10px"}}>
+                {oneFile.name}.<small>{oneFile.ext}</small>.{" "}
+                <b>{oneFile.folderId}</b>
+              </span>
+              <span
+                style={{ marginLeft: "15px", fontSize: "20px" }}
+                onClick={() => {
+                  handleRemove(oneFile.fileId);
+                }}
+              >
                 <MdCancel />
               </span>
             </span>

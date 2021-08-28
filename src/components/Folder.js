@@ -7,10 +7,12 @@ import { MdCancel } from "react-icons/md";
 import { useParams } from "react-router";
 import { Breadcrumb } from "react-bootstrap";
 import { HiBackspace } from "react-icons/hi";
+import folderImage from "../assets/img/folder.png";
 
 export default function Folder({ parentFolder }) {
   const { folderId } = useParams();
-  const { getFoldersForAPage, getBreadCrumb, renameFolder } = useContext(FolderContext);
+  const { getFoldersForAPage, getBreadCrumb, renameFolder } =
+    useContext(FolderContext);
   const [currentPageFolders, setcurrentPageFolders] = useState([]);
   const [breadCrumbItems, setBreadCrumbItems] = useState([]);
   const [open, setOpen] = useState(false);
@@ -57,7 +59,7 @@ export default function Folder({ parentFolder }) {
     openModal();
     setNewName(folder.name);
     setRenameId(folder.folderId);
-  }
+  };
 
   return currentPageFolders.length ? (
     <section>
@@ -77,16 +79,17 @@ export default function Folder({ parentFolder }) {
       </Breadcrumb>
 
       <br />
+      
       {currentPageFolders.map((folder) => {
         return (
-          <span>
+          <span key={folder.folderId}>
             <div
-              key={folder.folderId}
-              onContextMenu={(e) => {handleRightClick(e, folder);}}
+              onContextMenu={(e) => {
+                handleRightClick(e, folder);
+              }}
               style={{
-                border: "2px solid black",
                 display: "inline",
-                padding: "8px 14px 8px 5px",
+                padding: "30px 14px 30px 5px",
                 borderRadius: "5px",
                 margin: "2px",
               }}
@@ -100,8 +103,8 @@ export default function Folder({ parentFolder }) {
                 variant="outline-dark"
                 className="text-truncate m-2"
               >
-                <AiFillFolder fontSize="30px" style={{ margin: "2px 6px" }} />
-                {folder.name}
+                <img src={folderImage} alt="Folder" width="50px" />
+                <span style={{ paddingLeft: "10px" }}>{folder.name}</span>
               </span>
               <span
                 style={{
