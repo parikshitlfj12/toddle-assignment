@@ -57,6 +57,16 @@ const FolderContextProvider = (props) => {
     },
   ]);
 
+  const renameFolder = (folderId, newName) => {
+    const newArray = folders.map(oneFolder => {
+      if(oneFolder.folderId === folderId) {
+        oneFolder.name = newName;
+      }
+      return oneFolder;
+    }) 
+    setFolders(newArray);
+  }
+
   const getBreadCrumb = (currentFolder) => {
     const arr = []
     if(currentFolder === undefined || currentFolder.parentId === undefined || currentFolder.folderId === undefined || currentFolder.name === "/"){
@@ -76,7 +86,7 @@ const FolderContextProvider = (props) => {
     })[0]
 
     
-    while (parent.name !== "Root") {
+    while (parent.parentId !== null) {
       tempArr.push(parent.name);
       let newParent = folders.filter(fold => {
         return (fold.folderId === parent.parentId)
@@ -135,6 +145,7 @@ const FolderContextProvider = (props) => {
         getFoldersForAPage,
         getCurrentFolder,
         getBreadCrumb,
+        renameFolder
       }}
     >
       {props.children}
