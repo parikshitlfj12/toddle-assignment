@@ -20,7 +20,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     setCurrentFolder(getCurrentFolder(folderId));
-    console.log(getCurrentFolder(folderId))
   }, [getCurrentFolder, folderId])
 
   return (

@@ -1,94 +1,141 @@
-import React, { createContext, useState } from 'react'
-import uuid from 'react-uuid'
-
+import React, { createContext, useState } from "react";
+import uuid from "react-uuid";
 
 export const FolderContext = createContext();
 
 const FolderContextProvider = (props) => {
-  const [folders,setFolders] = useState([
-      {
-        name: "Root",
-        folderId: "7895187",
-        parentId: null
-      },
-      {
-        name: "1",
-        folderId: "63211",
-        parentId: "7895187"
-      },
-      {
-        name: "2",
-        folderId: "12nex",
-        parentId: "7895187"
-      },
-      {
-        name: "3",
-        folderId: "3kfnsn",
-        parentId: "7895187"
-      },
-      {
-        name: "4",
-        folderId: "aslknca",
-        parentId: "63211"
-      },
-      {
-        name: "5",
-        folderId: "6nqkjwsa",
-        parentId: "63211"
-      },
-      {
-        name: "6",
-        folderId: "63211",
-        parentId: "6nqkjwsa"
-      },
-      {
-        name: "8",
-        folderId: "63211",
-        parentId: "3kfnsn"
-      },
-      {
-        name: "10",
-        folderId: "632asd11",
-        parentId: "3kfnsn"
-      },
-    ]);
+  const [folders, setFolders] = useState([
+    {
+      name: "Root",
+      folderId: "7895187",
+      parentId: null,
+    },
+    {
+      name: "1",
+      folderId: "63211",
+      parentId: "7895187",
+    },
+    {
+      name: "2",
+      folderId: "12nex",
+      parentId: "7895187",
+    },
+    {
+      name: "3",
+      folderId: "3kfnsn",
+      parentId: "7895187",
+    },
+    {
+      name: "4",
+      folderId: "aslknca",
+      parentId: "63211",
+    },
+    {
+      name: "5",
+      folderId: "6nqkjwsa",
+      parentId: "63211",
+    },
+    {
+      name: "6",
+      folderId: "63211",
+      parentId: "6nqkjwsa",
+    },
+    {
+      name: "8",
+      folderId: "63211",
+      parentId: "3kfnsn",
+    },
+    {
+      name: "10",
+      folderId: "632asd11",
+      parentId: "3kfnsn",
+    },
+    {
+      name: "12",
+      folderId: "12kjnasdn",
+      parentId: "632asd11",
+    },
+  ]);
+
+  const getBreadCrumb = (currentFolder) => {
+    const arr = []
+    if(currentFolder === undefined || currentFolder.parentId === undefined || currentFolder.folderId === undefined || currentFolder.name === "/"){
+      return ["/"];
+    }
+    if(currentFolder.parentId === null){
+      return ["/", "Root"];
+    }
+    arr.push("/", "Root");
+    console.log("curren Folder Name == ", currentFolder.name);
+    arr.push(currentFolder.name);
+
+    
+    let parent = folders.filter(fold => {
+      return (fold.folderId === currentFolder.parentId)
+    })[0]
+
+    console.log("parent  = ", parent.name)
+
+    while (parent.name !== "Root") {
+      arr.push(parent.name);
+      let newParent = folders.filter(fold => {
+        return (fold.folderId === parent.parentId)
+      })[0]
+      parent = newParent;
+    }
+    
+    return arr;
+  };
 
   const getFoldersForAPage = (folderId = null) => {
-    if(folderId == null){
-      const returnFolder = folders.filter(fol => fol.parentId === null)
+    if (folderId == null) {
+      const returnFolder = folders.filter((fol) => fol.parentId === null);
       return returnFolder;
     } else {
-      const pageFolders = folders.filter(folder => {
-        return (folder.parentId === folderId);
-      })
+      const pageFolders = folders.filter((folder) => {
+        return folder.parentId === folderId;
+      });
       return pageFolders;
     }
-  }
+  };
 
   const addFolder = (name, parentId) => {
     const folderId = uuid();
-    setFolders([...folders, {name, parentId, folderId}]);
-  }
+    setFolders([...folders, { name, parentId, folderId }]);
+  };
 
   const getCurrentFolder = (folderId = undefined) => {
-    if(folderId === undefined){
-      const folde = Object.create((folders.filter(fol => fol.parentId === null))[0]);
+    if (folderId === undefined) {
+      const folde = Object.create(
+        folders.filter((fol) => fol.parentId === null)[0]
+      );
       folde.name = "/";
       return folde;
     }
-    return((folders.filter(fol => fol.folderId === folderId))[0]);
-  }
+    return folders.filter((fol) => fol.folderId === folderId)[0];
+  };
 
   const removeFolder = (folderId) => {
-    setFolders(folders.filter(fol => {
-      return (fol.folderId !== folderId);
-    }))
-  }
+    setFolders(
+      folders.filter((fol) => {
+        return fol.folderId !== folderId;
+      })
+    );
+  };
   return (
-    <FolderContext.Provider value={{folders, addFolder, removeFolder, getFoldersForAPage, getCurrentFolder}}>
+    <FolderContext.Provider
+      value={{
+        folders,
+        addFolder,
+        removeFolder,
+        getFoldersForAPage,
+        getCurrentFolder,
+        getBreadCrumb,
+      }}
+    >
       {props.children}
     </FolderContext.Provider>
   );
-}
- 
+};
+
 export default FolderContextProvider;

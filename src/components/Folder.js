@@ -5,15 +5,18 @@ import { Button } from "react-bootstrap";
 import { FolderContext } from "../contexts/FolderContext";
 import { MdCancel } from "react-icons/md";
 import { useParams } from "react-router";
+import { Breadcrumb } from "react-bootstrap";
 
 export default function Folder({parentFolder}) {
   const { folderId } = useParams();
-  const { getFoldersForAPage } = useContext(FolderContext);
+  const { getFoldersForAPage, getBreadCrumb } = useContext(FolderContext);
   const [currentPageFolders, setcurrentPageFolders] = useState([]);
+  const [breadCrumbItems, setBreadCrumbItems] = useState([]);
 
   useEffect(() => {
-    setcurrentPageFolders(getFoldersForAPage(folderId))
-  }, [getFoldersForAPage, folderId])
+    setcurrentPageFolders(getFoldersForAPage(folderId));
+    setBreadCrumbItems(getBreadCrumb(parentFolder));
+  }, [getFoldersForAPage, folderId, getBreadCrumb, parentFolder])
 
   const { removeFolder } = useContext(FolderContext);
   const history = useHistory();
@@ -25,7 +28,14 @@ export default function Folder({parentFolder}) {
 
   return currentPageFolders.length ? (
     <section>
-      Current Folder - {parentFolder.name}
+      <Breadcrumb>
+        {breadCrumbItems.map(item => {
+          return(
+            <Breadcrumb.Item href="#">{item}</Breadcrumb.Item>
+          )
+        })}
+        
+      </Breadcrumb>
       <br/>
       {currentPageFolders.map((folder) => {
         return (

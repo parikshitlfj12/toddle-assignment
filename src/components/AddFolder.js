@@ -8,10 +8,9 @@ export default function AddFolder({parentFolder}) {
   const { addFolder } = useContext(FolderContext);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const [buttonActive, setButtonActive] = useState(true);
+  const [buttonActive, setButtonActive] = useState(false);
 
   useEffect(() => {
-    console.log("parent Folder",parentFolder)
     if(parentFolder.parentId === null){
       setButtonActive(false);
     }
