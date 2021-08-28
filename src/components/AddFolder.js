@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { AiFillFolderAdd } from "react-icons/ai";
 import { FolderContext } from "../contexts/FolderContext";
@@ -8,7 +8,7 @@ export default function AddFolder({parentFolder}) {
   const { addFolder } = useContext(FolderContext);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const [buttonActive, setButtonActive] = useState(false);
+  // const [buttonActive, setButtonActive] = useState(false);
 
   // useEffect(() => {
   //   if(parentFolder.parentId === null){
@@ -35,7 +35,7 @@ export default function AddFolder({parentFolder}) {
 
   return (
     <section style={{display: "inline", margin: "0px 10px"}}>
-      <Button disabled={buttonActive} onClick={openModal} className="mt-3" variant="outline-danger">
+      <Button onClick={openModal} className="mt-3" variant="outline-danger">
         <AiFillFolderAdd fontSize="25px" />
       </Button>
       <Modal show={open} onHide={closeModal}>
