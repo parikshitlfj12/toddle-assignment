@@ -67,10 +67,10 @@ export default function File() {
                   handleRemove(oneFile.fileId);
                 }}
               >
-                <MdCancel />
+                <MdCancel color="#dc143c" style={{alt:"Delete", cursor:"pointer"}}/>
               </span>
             </span>
-            <Modal show={open} onHide={closeModal}>
+            <Modal centered show={open} onHide={closeModal}>
               <Form onSubmit={handleSubmit}>
                 <Modal.Body>
                   <Form.Group>

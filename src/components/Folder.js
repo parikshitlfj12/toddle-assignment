@@ -127,7 +127,7 @@ export default function Folder({ parentFolder }) {
                   handleRemove(folder.folderId);
                 }}
               >
-                <MdCancel />
+                <MdCancel color="#dc143c" />
               </span>
             </div>
 
