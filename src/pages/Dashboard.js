@@ -31,7 +31,6 @@ export default function Dashboard() {
   return (
     <>
       <NavbarComponent />
-      {/* <SideBar /> */}
       <Container className="mt-4">
         <Row>
           <Col xs={10}>

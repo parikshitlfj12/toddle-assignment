@@ -1,14 +1,13 @@
 import React, { useState, useContext } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
 import { AiFillFolderAdd } from "react-icons/ai";
 import { FolderContext } from "../contexts/FolderContext";
+import Button from "@material-ui/core/Button";
 
-
-export default function AddFolder({parentFolder, isRoot}) {
+export default function AddFolder({ parentFolder, isRoot }) {
   const { addFolder } = useContext(FolderContext);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  
 
   function openModal() {
     setOpen(true);
@@ -19,7 +18,7 @@ export default function AddFolder({parentFolder, isRoot}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Adding a folder in Context API, Two Central Store 
+    // Adding a folder in Context API, Two Central Store
     // Folders and Files
     addFolder(name, parentFolder.folderId);
     setName("");
@@ -27,9 +26,16 @@ export default function AddFolder({parentFolder, isRoot}) {
   }
 
   return (
-    <section style={{display: "inline", margin: "0px 10px"}}>
-      <Button disabled={isRoot} onClick={openModal} className="mt-3" variant="outline-success">
-        <AiFillFolderAdd fontSize="25px" />
+    <section style={{ margin: "0px 10px" }}>
+      <Button
+        variant="contained"
+        style={{ width: "165px", backgroundColor: "#4AB7FF", color: "white" }}
+        disabled={isRoot}
+        onClick={openModal}
+        className="mt-3"
+        startIcon={<AiFillFolderAdd />}
+      >
+        Add Folder
       </Button>
       <Modal show={open} onHide={closeModal}>
         <Form onSubmit={handleSubmit}>
@@ -45,10 +51,27 @@ export default function AddFolder({parentFolder, isRoot}) {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={closeModal}>
+            <Button
+              variant="contained"
+              style={{
+                width: "165px",
+                backgroundColor: "grey",
+                color: "white",
+              }}
+              onClick={closeModal}
+            >
               Close
             </Button>
-            <Button variant="success" type="submit">
+            <Button
+              variant="contained"
+              style={{
+                marginLeft: "10px",
+                width: "165px",
+                backgroundColor: "#4AB7FF",
+                color: "white",
+              }}
+              type="submit"
+            >
               Add Folder
             </Button>
           </Modal.Footer>

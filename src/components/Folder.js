@@ -1,6 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+import DeleteIcon from "@material-ui/icons/Delete";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { FolderContext } from "../contexts/FolderContext";
 import { MdCancel } from "react-icons/md";
 import { useParams } from "react-router";
@@ -8,10 +14,43 @@ import { Breadcrumb } from "react-bootstrap";
 import { HiBackspace } from "react-icons/hi";
 import folderImage from "../assets/img/folder.png";
 
+// Material UI
+
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import HomeIcon from "@material-ui/icons/Home";
+import { emphasize, withStyles } from "@material-ui/core/styles";
+import Chip from "@material-ui/core/Chip";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
+// Css styles
 import "../assets/styles/folder.css";
-import { Hidden } from "@material-ui/core";
+
+const StyledBreadcrumb = withStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.grey[100],
+    height: theme.spacing(3),
+    color: theme.palette.grey[800],
+    fontWeight: theme.typography.fontWeightRegular,
+    "&:hover, &:focus": {
+      backgroundColor: theme.palette.grey[300],
+    },
+    "&:active": {
+      boxShadow: theme.shadows[1],
+      backgroundColor: emphasize(theme.palette.grey[300], 0.12),
+    },
+  },
+}))(Chip);
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function Folder({ parentFolder, isRoot }) {
+  const classes = useStyles();
+
   // Data
   const { folderId } = useParams();
   const { getFoldersForAPage, getBreadCrumb, renameFolder } =
@@ -36,10 +75,6 @@ export default function Folder({ parentFolder, isRoot }) {
   }
   function closeModal() {
     setOpen(false);
-  }
-
-  function openMainModal() {
-    setOpenMain(true);
   }
   function closeMainModal() {
     setOpenMain(false);
@@ -77,20 +112,26 @@ export default function Folder({ parentFolder, isRoot }) {
   // Return
   return currentPageFolders.length ? (
     <section>
-      <Breadcrumb>
-        <HiBackspace
+      <Breadcrumbs aria-label="breadcrumb">
+        <StyledBreadcrumb
           onClick={handleBack}
-          fontSize="25px"
-          style={{ marginRight: "20px", cursor: "pointer" }}
+          icon={<ArrowBackIosIcon style={{ fontSize: "15px" }} />}
         />
         {breadCrumbItems.map((item) => {
-          return (
-            <Breadcrumb.Item key={item} className="style-breadcrumb-items">
-              {item}
-            </Breadcrumb.Item>
-          );
+          return item === "Root" ? (
+          <>
+            <StyledBreadcrumb
+                label="Root"
+                icon={<HomeIcon style={{ fontSize: "15px" }} />}
+              />
+          </>
+          ) : (
+          <>
+            <StyledBreadcrumb key={item} label={item} />
+          </>
+          )
         })}
-      </Breadcrumb>
+      </Breadcrumbs>
 
       <br />
       {currentPageFolders.map((folder) => {
@@ -123,19 +164,18 @@ export default function Folder({ parentFolder, isRoot }) {
                 style={{
                   marginLeft: "6px",
                   fontSize: "20px",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => {
-                  console.log("Is Root == ", isRoot)
-                  if(isRoot){
+                  console.log("Is Root == ", isRoot);
+                  if (isRoot) {
                     return;
-                  }
-                  else {
+                  } else {
                     handleRemove(folder.folderId);
                   }
                 }}
               >
-                {isRoot ? <></> : <MdCancel color="#dc143c"/>}
+                {isRoot ? <></> : <MdCancel color="#dc143c" />}
               </span>
             </div>
 
@@ -151,14 +191,24 @@ export default function Folder({ parentFolder, isRoot }) {
                 <Modal.Title>Choose Action</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <b><i>WARNING!!! </i></b>Clicking on delete button will permanently delete your Folder from Drive.
+                <b>
+                  <i>WARNING!!! </i>
+                </b>
+                Clicking on delete button will permanently delete your Folder
+                from Drive.
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={closeMainModal}>
+                <Button
+                  variant="contained"
+                  startIcon={<HighlightOffIcon />}
+                  onClick={closeMainModal}
+                >
                   Close
                 </Button>
                 <Button
-                  variant="success"
+                  variant="contained"
+                  style={{ backgroundColor: "#4AB7FF", marginLeft: "10px" }}
+                  startIcon={<AccountCircleIcon />}
                   onClick={() => {
                     console.log("OPEN RENAME MODAL");
                     closeMainModal();
@@ -168,12 +218,14 @@ export default function Folder({ parentFolder, isRoot }) {
                   Rename
                 </Button>
                 <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                  startIcon={<DeleteIcon />}
                   onClick={() => {
                     closeMainModal();
                     handleRemove(folder.folderId);
                   }}
-                  variant="danger"
-                  type="submit"
                 >
                   Delete
                 </Button>
@@ -194,10 +246,19 @@ export default function Folder({ parentFolder, isRoot }) {
                   </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={closeModal}>
+                  <Button
+                    variant="contained"
+                    startIcon={<HighlightOffIcon />}
+                    onClick={closeModal}
+                  >
                     Close
                   </Button>
-                  <Button variant="success" type="submit">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{ backgroundColor: "#4AB7FF", marginLeft: "10px" }}
+                    startIcon={<AccountCircleIcon />}
+                  >
                     Rename
                   </Button>
                 </Modal.Footer>
@@ -209,20 +270,26 @@ export default function Folder({ parentFolder, isRoot }) {
     </section>
   ) : (
     <div>
-      <Breadcrumb>
-        <HiBackspace
+      <Breadcrumbs aria-label="breadcrumb">
+        <StyledBreadcrumb
           onClick={handleBack}
-          fontSize="25px"
-          style={{ marginRight: "20px", cursor: "pointer" }}
+          icon={<ArrowBackIosIcon style={{ fontSize: "15px" }} />}
         />
         {breadCrumbItems.map((item) => {
-          return (
-            <Breadcrumb.Item key={item} className="style-breadcrumb-items">
-              {item}
-            </Breadcrumb.Item>
-          );
+          return item === "Root" ? (
+          <>
+            <StyledBreadcrumb
+                label="Root"
+                icon={<HomeIcon style={{ fontSize: "15px" }} />}
+              />
+          </>
+          ) : (
+          <>
+            <StyledBreadcrumb key={item} label={item} />
+          </>
+          )
         })}
-      </Breadcrumb>
+      </Breadcrumbs>
       <div className="mt-5">No Folders</div>
     </div>
   );
