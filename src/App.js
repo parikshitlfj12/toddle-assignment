@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 import FolderContextProvider from './contexts/FolderContext';
-import FileContextProvider from "./contexts/FileContext";
+import FileContextProvider from "./contexts/fileContext";
 
 function App() {
   return (

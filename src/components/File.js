@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
-import { FileContext } from "../contexts/FileContext";
+import { FileContext } from "../contexts/fileContext";
 import { Modal, Form, Button } from "react-bootstrap";
 import fileImage from "../assets/img/file.png";
 

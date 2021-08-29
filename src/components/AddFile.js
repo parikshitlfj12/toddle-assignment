@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { AiFillFileText } from "react-icons/ai";
-import { FileContext } from "../contexts/FileContext";
+import { FileContext } from "../contexts/fileContext";
 
 export default function AddFile({ parentFolder }) {  
   const {addFile} = useContext(FileContext);
