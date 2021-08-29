@@ -194,7 +194,7 @@ export default function Folder({ parentFolder, isRoot }) {
                   variant="outline-dark"
                   className="text-truncate m-2"
                 >
-                  <img src={folderImage} alt="Folder" width="50px" />
+                  <img src={folderImage} alt="Folder" width="30px" />
                   <span style={{ paddingLeft: "10px" }}>{folder.name}</span>
                 </span>
                 <span

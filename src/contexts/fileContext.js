@@ -6,22 +6,63 @@ export const FileContext = createContext();
 const FileContextProvider = (props) => {
   const [files, setFiles] = useState([
     {
-      name: "reyna",
+      name: "Kashmir",
+      ext: "jpeg",
+      fileId: uuid(),
+      folderId: "5nqkjwsa",
+    },
+    {
+      name: "LadhakMom",
       ext: "png",
       fileId: uuid(),
-      folderId: "999999",
+      folderId: "5nqkjwsa",
     },
     {
-      name: "worksheet",
-      ext: "csv",
+      name: "RandomPhoto",
+      ext: "jpeg",
       fileId: uuid(),
-      folderId: "999999",
-    },
-    {
-      name: "Diet",
-      ext: "pdf",
+      folderId: "63211",
+    },{
+      name: "chrome",
+      ext: "exe",
       fileId: uuid(),
       folderId: "3kfnsn",
+    },
+    {
+      name: "firefox",
+      ext: "exe",
+      fileId: uuid(),
+      folderId: "3kfnsn",
+    },
+    {
+      name: "wolfStreet",
+      ext: "pm4",
+      fileId: uuid(),
+      folderId: "WOFJSKsd",
+    },
+    {
+      name: "Never Back Down",
+      ext: "mp4",
+      fileId: uuid(),
+      folderId: "NBDkjnasd",
+    },
+    {
+      name: "Github",
+      ext: "exe",
+      fileId: uuid(),
+      folderId: "3kfnsn",
+    },
+    {
+      name: "Edge",
+      ext: "exe",
+      fileId: uuid(),
+      folderId: "3kfnsn",
+    },
+    {
+      name: "chrome",
+      ext: "bin",
+      fileId: uuid(),
+      folderId: "Gkjasd",
     },
   ]);
 
