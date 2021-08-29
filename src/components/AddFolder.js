@@ -37,7 +37,7 @@ export default function AddFolder({ parentFolder, isRoot }) {
       >
         Add Folder
       </Button>
-      <Modal show={open} onHide={closeModal}>
+      <Modal centered show={open} onHide={closeModal}>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group>

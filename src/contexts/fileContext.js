@@ -9,13 +9,13 @@ const FileContextProvider = (props) => {
       name: "reyna",
       ext: "png",
       fileId: uuid(),
-      folderId: "7895187",
+      folderId: "999999",
     },
     {
       name: "worksheet",
       ext: "csv",
       fileId: uuid(),
-      folderId: "7895187",
+      folderId: "999999",
     },
     {
       name: "Diet",

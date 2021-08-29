@@ -39,7 +39,7 @@ export default function AddFile({ parentFolder, isRoot }) {
       >
         Add File
       </Button>
-      <Modal show={open} onHide={closeModal}>
+      <Modal centered show={open} onHide={closeModal}>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group>
@@ -50,7 +50,7 @@ export default function AddFile({ parentFolder, isRoot }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <Form.Label style={{ marginTop: "20px" }}>File Ext</Form.Label>
+              <Form.Label style={{ marginTop: "20px" }}>File Extension (.ext)</Form.Label>
               <Form.Control
                 type="text"
                 required
