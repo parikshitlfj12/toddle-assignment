@@ -10,14 +10,14 @@ import folderImage from "../assets/img/folder.png";
 import "../assets/styles/folder.css";
 
 export default function Folder({ parentFolder }) {
-
-
   // Data
   const { folderId } = useParams();
-  const { getFoldersForAPage, getBreadCrumb, renameFolder } = useContext(FolderContext);
+  const { getFoldersForAPage, getBreadCrumb, renameFolder } =
+    useContext(FolderContext);
   const [currentPageFolders, setcurrentPageFolders] = useState([]);
   const [breadCrumbItems, setBreadCrumbItems] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openMain, setOpenMain] = useState(false);
   const [newName, setNewName] = useState("");
   const [renameId, setRenameId] = useState("");
   const { removeFolder, getCurrentFolder } = useContext(FolderContext);
@@ -28,15 +28,19 @@ export default function Folder({ parentFolder }) {
     setBreadCrumbItems(getBreadCrumb(parentFolder));
   }, [getFoldersForAPage, folderId, getBreadCrumb, parentFolder]);
 
-
-
-
   // Functions
   function openModal() {
     setOpen(true);
   }
   function closeModal() {
     setOpen(false);
+  }
+
+  function openMainModal() {
+    setOpenMain(true);
+  }
+  function closeMainModal() {
+    setOpenMain(false);
   }
 
   const handleRemove = (folderId) => {
@@ -61,14 +65,12 @@ export default function Folder({ parentFolder }) {
   };
 
   const handleRightClick = (e, folder) => {
+    setOpenMain(true);
     e.preventDefault();
-    openModal();
+    // openModal();
     setNewName(folder.name);
     setRenameId(folder.folderId);
   };
-
-
-
 
   // Return
   return currentPageFolders.length ? (
@@ -129,11 +131,52 @@ export default function Folder({ parentFolder }) {
               </span>
             </div>
 
+            {/* MAIN MODAL */}
+            <Modal
+              show={openMain}
+              onHide={closeMainModal}
+              size="lg"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+            >
+              <Modal.Header>
+                <Modal.Title>Choose Action</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <b><i>WARNING!!! </i></b>Clicking on delete button will permanently delete your Folder from Drive.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="success"
+                  onClick={() => {
+                    console.log("OPEN RENAME MODAL");
+                    closeMainModal();
+                    openModal();
+                  }}
+                >
+                  Rename
+                </Button>
+                <Button
+                  onClick={() => {
+                    closeMainModal();
+                    handleRemove(folder.folderId);
+                  }}
+                  variant="danger"
+                  type="submit"
+                >
+                  Delete
+                </Button>
+                <Button variant="secondary" onClick={closeMainModal}>
+                    Close
+                  </Button>
+              </Modal.Footer>
+            </Modal>
+
             <Modal show={open} onHide={closeModal}>
               <Form onSubmit={handleSubmit}>
                 <Modal.Body>
                   <Form.Group>
-                    <Form.Label>Rename Folder</Form.Label>
+                    <Form.Label>Type New Folder Name</Form.Label>
                     <Form.Control
                       type="text"
                       required
