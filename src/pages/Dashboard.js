@@ -14,11 +14,19 @@ import { FolderContext } from "../contexts/FolderContext";
 export default function Dashboard() {
   const { folderId } = useParams();
   const { getCurrentFolder } = useContext(FolderContext);
+  const [isRoot, setIsRoot] = useState(false);
   const [currentFolder, setCurrentFolder] = useState({});
 
   useEffect(() => {
     setCurrentFolder(getCurrentFolder(folderId));
-  }, [getCurrentFolder, folderId])
+  }, [getCurrentFolder, folderId]);
+  useEffect(() => {
+    if(folderId == null){
+      setIsRoot(true);
+    } else {
+      setIsRoot(false)
+    }
+  },[folderId])
 
   return (
     <>
@@ -27,13 +35,13 @@ export default function Dashboard() {
       <Container className="mt-4">
         <Row>
           <Col xs={10}>
-            <Folder parentFolder={currentFolder}/>
+            <Folder parentFolder={currentFolder} isRoot={isRoot}/>
             <hr />
-            <File />
+            <File isRoot={isRoot}/>
           </Col>
           <Col xs={2} style={{ textAlign: "right" }}>
-            <AddFolder parentFolder={currentFolder}/>
-            <AddFile parentFolder={currentFolder}/>
+            <AddFolder parentFolder={currentFolder} isRoot={isRoot}/>
+            <AddFile parentFolder={currentFolder} isRoot={isRoot}/>
           </Col>
         </Row>
       </Container>

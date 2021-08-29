@@ -4,17 +4,10 @@ import { AiFillFolderAdd } from "react-icons/ai";
 import { FolderContext } from "../contexts/FolderContext";
 
 
-export default function AddFolder({parentFolder}) {
+export default function AddFolder({parentFolder, isRoot}) {
   const { addFolder } = useContext(FolderContext);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  // const [buttonActive, setButtonActive] = useState(false);
-
-  // useEffect(() => {
-  //   if(parentFolder.parentId === null){
-  //     setButtonActive(false);
-  //   }
-  // }, [parentFolder.parentId, parentFolder])
   
 
   function openModal() {
@@ -35,7 +28,7 @@ export default function AddFolder({parentFolder}) {
 
   return (
     <section style={{display: "inline", margin: "0px 10px"}}>
-      <Button onClick={openModal} className="mt-3" variant="outline-info">
+      <Button disabled={isRoot} onClick={openModal} className="mt-3" variant="outline-success">
         <AiFillFolderAdd fontSize="25px" />
       </Button>
       <Modal show={open} onHide={closeModal}>

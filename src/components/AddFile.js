@@ -3,7 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { AiFillFileText } from "react-icons/ai";
 import { FileContext } from "../contexts/fileContext";
 
-export default function AddFile({ parentFolder }) {  
+export default function AddFile({ parentFolder, isRoot }) {  
   const {addFile} = useContext(FileContext);
 
 
@@ -29,7 +29,7 @@ export default function AddFile({ parentFolder }) {
 
   return (
     <section style={{display: "inline"}}>
-      <Button onClick={openModal} className="mt-3" variant="outline-info">
+      <Button disabled={isRoot} onClick={openModal} className="mt-3" variant="outline-success">
         <AiFillFileText fontSize="25px" />
       </Button>
       <Modal show={open} onHide={closeModal}>
