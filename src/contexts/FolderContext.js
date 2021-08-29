@@ -11,49 +11,64 @@ const FolderContextProvider = (props) => {
       parentId: null,
     },
     {
-      name: "1Images",
+      name: "Images",
       folderId: "63211",
       parentId: "999999",
     },
     {
-      name: "2Movies",
+      name: "Movies",
       folderId: "12nex",
       parentId: "999999",
     },
     {
-      name: "3Software",
+      name: "Software",
       folderId: "3kfnsn",
       parentId: "999999",
     },
     {
-      name: "4Avi Photos",
+      name: "Dad's Photos",
       folderId: "aslknca",
       parentId: "63211",
     },
     {
-      name: "5Lavi Photos",
+      name: "Mom's Picture",
       folderId: "5nqkjwsa",
       parentId: "63211",
     },
     {
-      name: "6Lavi School",
-      folderId: "63211",
-      parentId: "6nqkjwsa",
-    },
-    {
-      name: "8Adobe",
-      folderId: "8ajshbd",
+      name: "Google Chrome",
+      folderId: "Gkjasd",
       parentId: "3kfnsn",
     },
     {
-      name: "10VS-Code",
-      folderId: "632asd11",
+      name: "Valorant",
+      folderId: "Vjhbasnjk",
       parentId: "3kfnsn",
     },
     {
-      name: "12VS-Extension",
-      folderId: "12kjnasdn",
-      parentId: "632asd11",
+      name: "Valorant bin",
+      folderId: "VBakjdns",
+      parentId: "Vjhbasnjk",
+    },
+    {
+      name: "Wolf Of WallStreet",
+      folderId: "WOFJSKsd",
+      parentId: "12nex",
+    },
+    {
+      name: "Never Back Down",
+      folderId: "NBDkjnasd",
+      parentId: "12nex",
+    },
+    {
+      name: "Never Back Down Lyrics",
+      folderId: "NBD2kjnasd",
+      parentId: "NBDkjnasd",
+    },
+    {
+      name: "Legends",
+      folderId: "Legkjnasd",
+      parentId: "12nex",
     },
   ]);
 
