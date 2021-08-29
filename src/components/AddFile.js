@@ -29,7 +29,7 @@ export default function AddFile({ parentFolder }) {
 
   return (
     <section style={{display: "inline"}}>
-      <Button onClick={openModal} className="mt-3" variant="outline-danger">
+      <Button onClick={openModal} className="mt-3" variant="outline-info">
         <AiFillFileText fontSize="25px" />
       </Button>
       <Modal show={open} onHide={closeModal}>

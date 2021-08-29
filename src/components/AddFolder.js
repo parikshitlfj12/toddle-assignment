@@ -35,7 +35,7 @@ export default function AddFolder({parentFolder}) {
 
   return (
     <section style={{display: "inline", margin: "0px 10px"}}>
-      <Button onClick={openModal} className="mt-3" variant="outline-danger">
+      <Button onClick={openModal} className="mt-3" variant="outline-info">
         <AiFillFolderAdd fontSize="25px" />
       </Button>
       <Modal show={open} onHide={closeModal}>
