@@ -7,23 +7,23 @@ const FolderContextProvider = (props) => {
   const [folders, setFolders] = useState([
     {
       name: "Root",
-      folderId: "7895187",
+      folderId: "999999",
       parentId: null,
     },
     {
       name: "1Images",
       folderId: "63211",
-      parentId: "7895187",
+      parentId: "999999",
     },
     {
       name: "2Movies",
       folderId: "12nex",
-      parentId: "7895187",
+      parentId: "999999",
     },
     {
       name: "3Software",
       folderId: "3kfnsn",
-      parentId: "7895187",
+      parentId: "999999",
     },
     {
       name: "4Avi Photos",

@@ -5,7 +5,7 @@ import { FileContext } from "../contexts/fileContext";
 import { Modal, Form, Button } from "react-bootstrap";
 import fileImage from "../assets/img/file.png";
 
-export default function File() {
+export default function File({isRoot}) {
   const { removeFile, getFileForPage, renameFile } = useContext(FileContext);
   const [files, setFiles] = useState([]);
   const { folderId } = useParams();
@@ -98,6 +98,8 @@ export default function File() {
       })}
     </section>
   ) : (
-    <div>No Files</div>
+    <>
+      {isRoot ? <></> : <div>No Files</div>}
+    </>
   );
 }

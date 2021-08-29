@@ -7,9 +7,11 @@ import { useParams } from "react-router";
 import { Breadcrumb } from "react-bootstrap";
 import { HiBackspace } from "react-icons/hi";
 import folderImage from "../assets/img/folder.png";
-import "../assets/styles/folder.css";
 
-export default function Folder({ parentFolder }) {
+import "../assets/styles/folder.css";
+import { Hidden } from "@material-ui/core";
+
+export default function Folder({ parentFolder, isRoot }) {
   // Data
   const { folderId } = useParams();
   const { getFoldersForAPage, getBreadCrumb, renameFolder } =
@@ -121,13 +123,19 @@ export default function Folder({ parentFolder }) {
                 style={{
                   marginLeft: "6px",
                   fontSize: "20px",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
                 onClick={() => {
-                  handleRemove(folder.folderId);
+                  console.log("Is Root == ", isRoot)
+                  if(isRoot){
+                    return;
+                  }
+                  else {
+                    handleRemove(folder.folderId);
+                  }
                 }}
               >
-                <MdCancel color="#dc143c" />
+                {isRoot ? <></> : <MdCancel color="#dc143c"/>}
               </span>
             </div>
 
@@ -146,6 +154,9 @@ export default function Folder({ parentFolder }) {
                 <b><i>WARNING!!! </i></b>Clicking on delete button will permanently delete your Folder from Drive.
               </Modal.Body>
               <Modal.Footer>
+                <Button variant="secondary" onClick={closeMainModal}>
+                  Close
+                </Button>
                 <Button
                   variant="success"
                   onClick={() => {
@@ -166,9 +177,6 @@ export default function Folder({ parentFolder }) {
                 >
                   Delete
                 </Button>
-                <Button variant="secondary" onClick={closeMainModal}>
-                    Close
-                  </Button>
               </Modal.Footer>
             </Modal>
 
@@ -209,7 +217,7 @@ export default function Folder({ parentFolder }) {
         />
         {breadCrumbItems.map((item) => {
           return (
-            <Breadcrumb.Item key={item} className="style-breadcrumb">
+            <Breadcrumb.Item key={item} className="style-breadcrumb-items">
               {item}
             </Breadcrumb.Item>
           );
