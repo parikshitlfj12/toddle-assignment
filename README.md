@@ -27,4 +27,13 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 
-## Thank you
+## Key Points to Notice In the Project
+
+1. *Only The Mid Section is Interactable other two sections are static content.
+2. Features Implemented - 
+   - File Creation, Delete, Rename (RightClick)
+   - Folder Creation, Delete, Rename (RightClick)
+   - Browse The Folders by Double Clicking On them.
+   - Duplication Check - (If you try to rename the file with the same file name as present in the current directory, it'll throw an error).
+   - BreadCrumbs with a Back Button to navigate.
+   - File Creation
