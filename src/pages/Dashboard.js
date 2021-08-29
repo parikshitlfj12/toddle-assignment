@@ -73,7 +73,7 @@ export default function Dashboard() {
     <>
     <Container fluid>
       <Row>
-        <Col className="first-col">
+        <Col xs={2} className="first-col">
           <FirstCol/>
         </Col>
         <Col xs={7} className="second-col">
@@ -106,7 +106,7 @@ export default function Dashboard() {
             </Row>
           </Container>
         </Col>
-        <Col className="third-col">
+        <Col xs={3} className="third-col">
           <ThirdCol/>
         </Col>
       </Row>

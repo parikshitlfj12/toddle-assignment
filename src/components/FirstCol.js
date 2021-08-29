@@ -13,7 +13,7 @@ export default function FirstCol() {
   return (
     <div className="one">
       <div onClick={handleClick} style={{cursor: "pointer"}}>
-        <img src={logoImage} alt="logo" style={{height: "60px", marginTop: "20px", marginRight: '80px'}} />
+        <img src={logoImage} alt="logo" style={{height: "60px", marginTop: "20px", marginRight: '40px'}} />
       </div>
       <div className="sideNav">
         <div style={{color: "#4AB7FF", cursor: "pointer"}} onClick={handleClick}>
@@ -44,7 +44,7 @@ export default function FirstCol() {
       </div>
 
 
-      <div style={{position:"relative", color:"#4AB7FF", top: "50%"}}>
+      <div style={{position:"relative", color:"#4AB7FF", top: "38%"}}>
         <b>Get the SKY.IO App</b>
       </div>
     </div>

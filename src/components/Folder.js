@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Modal, Form } from "react-bootstrap";
+import { Button as BootstrapButton, Modal, Form, Alert,  } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -56,6 +56,7 @@ export default function Folder({ parentFolder, isRoot }) {
   const [breadCrumbItems, setBreadCrumbItems] = useState([]);
   const [open, setOpen] = useState(false);
   const [openMain, setOpenMain] = useState(false);
+  const [duplicate, setDuplicate] = useState(false);
   const [newName, setNewName] = useState("");
   const [renameId, setRenameId] = useState("");
   const { removeFolder, getCurrentFolder } = useContext(FolderContext);
@@ -76,6 +77,10 @@ export default function Folder({ parentFolder, isRoot }) {
   function closeMainModal() {
     setOpenMain(false);
   }
+  
+  function closeDuplicateModal() {
+    setDuplicate(false);
+  }
 
   const handleRemove = (folderId) => {
     removeFolder(folderId);
@@ -91,9 +96,25 @@ export default function Folder({ parentFolder, isRoot }) {
     history.push(`/folder/${id}`);
   };
 
+  const checkDuplicate = () => {
+    // currentPageFolders
+    let flag = 0;
+    currentPageFolders.forEach(folder => {
+      if(folder.name === newName){
+        flag = 1;
+        return false;
+      }
+    })
+    return flag === 0 ? true : false;
+  }
+
   const handleSubmit = (e) => {
-    renameFolder(renameId, newName);
     e.preventDefault();
+    if(checkDuplicate() === false){
+      setDuplicate(true);
+      return;
+    }
+    renameFolder(renameId, newName);
     setNewName("");
     closeModal();
   };
@@ -227,7 +248,7 @@ export default function Folder({ parentFolder, isRoot }) {
                 </Modal.Footer>
               </Modal>
 
-              <Modal show={open} onHide={closeModal}>
+              <Modal centered show={open} onHide={closeModal}>
                 <Form onSubmit={handleSubmit}>
                   <Modal.Body>
                     <Form.Group>
@@ -262,6 +283,27 @@ export default function Folder({ parentFolder, isRoot }) {
             </span>
           );
         })}
+      </section>
+    
+      <section>
+        <Modal centered show={duplicate} onHide={closeDuplicateModal}>
+            <Modal.Body>
+              <Alert variant="danger">
+                <Alert.Heading>Folder Name Already Exist!</Alert.Heading>
+                <p>
+                  There Already Exist a Folder name in the directory.
+                  Please try to use a different Folder name
+                </p>
+              </Alert>
+            </Modal.Body>
+            <BootstrapButton
+              variant="outline-secondary"
+              onClick={closeDuplicateModal}
+              style={{margin: "-10px 10px 10px 10px"}}
+            >
+              Close
+            </BootstrapButton>
+        </Modal>
       </section>
     </section>
   ) : (
