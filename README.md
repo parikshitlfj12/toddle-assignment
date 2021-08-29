@@ -5,17 +5,17 @@ This project was created using React, Bootstrap, MaterialUI, ContextAPI.
 ## Steps to run -
 1. Clone The Source from the Below Link
 ### `git clone https://github.com/parikshitlfj12/toddle-assignment`
-
+<br/><br/>
 2. Go to the cloned directory, open Terminal and run - <br/>
 This would install all the dependencies needed for the project 
 ### `npm install`
-  
+  <br/><br/>
 
 3. Now to run it locally paste the following command in the terminal - 
 ### `npm start`
-
+<br/><br/>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
+<br/><br/><br/><br/>
 
 
 ### `npm run build`
