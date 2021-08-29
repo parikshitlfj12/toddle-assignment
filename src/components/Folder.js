@@ -134,139 +134,141 @@ export default function Folder({ parentFolder, isRoot }) {
       </Breadcrumbs>
 
       <br />
-      {currentPageFolders.map((folder) => {
-        return (
-          <span key={folder.folderId}>
-            <div
-              onContextMenu={(e) => {
-                handleRightClick(e, folder);
-              }}
-              style={{
-                display: "inline",
-                padding: "30px 14px 30px 5px",
-                borderRadius: "5px",
-                margin: "2px",
-              }}
-            >
-              <span
-                onDoubleClick={(e) => {
-                  e.preventDefault();
-                  handleNavigate(folder.folderId);
+      <section style={{marginTop: "20px"}}>
+        {currentPageFolders.map((folder) => {
+          return (
+            <span key={folder.folderId}>
+              <div
+                onContextMenu={(e) => {
+                  handleRightClick(e, folder);
                 }}
-                style={{ border: "none", cursor: "pointer" }}
-                variant="outline-dark"
-                className="text-truncate m-2"
-              >
-                <img src={folderImage} alt="Folder" width="50px" />
-                <span style={{ paddingLeft: "10px" }}>{folder.name}</span>
-              </span>
-              <span
                 style={{
-                  marginLeft: "6px",
-                  fontSize: "20px",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  console.log("Is Root == ", isRoot);
-                  if (isRoot) {
-                    return;
-                  } else {
-                    handleRemove(folder.folderId);
-                  }
+                  display: "inline",
+                  padding: "30px 14px 30px 5px",
+                  borderRadius: "5px",
+                  margin: "2px",
                 }}
               >
-                {isRoot ? <></> : <MdCancel color="#dc143c" />}
-              </span>
-            </div>
-
-            {/* MAIN MODAL */}
-            <Modal
-              show={openMain}
-              onHide={closeMainModal}
-              size="lg"
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-            >
-              <Modal.Header>
-                <Modal.Title>Choose Action</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <b>
-                  <i>WARNING!!! </i>
-                </b>
-                Clicking on delete button will permanently delete your Folder
-                from Drive.
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  variant="contained"
-                  startIcon={<HighlightOffIcon />}
-                  onClick={closeMainModal}
+                <span
+                  onDoubleClick={(e) => {
+                    e.preventDefault();
+                    handleNavigate(folder.folderId);
+                  }}
+                  style={{ border: "none", cursor: "pointer" }}
+                  variant="outline-dark"
+                  className="text-truncate m-2"
                 >
-                  Close
-                </Button>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "#4AB7FF", marginLeft: "10px" }}
-                  startIcon={<AccountCircleIcon />}
+                  <img src={folderImage} alt="Folder" width="50px" />
+                  <span style={{ paddingLeft: "10px" }}>{folder.name}</span>
+                </span>
+                <span
+                  style={{
+                    marginLeft: "6px",
+                    fontSize: "20px",
+                    cursor: "pointer",
+                  }}
                   onClick={() => {
-                    console.log("OPEN RENAME MODAL");
-                    closeMainModal();
-                    openModal();
+                    console.log("Is Root == ", isRoot);
+                    if (isRoot) {
+                      return;
+                    } else {
+                      handleRemove(folder.folderId);
+                    }
                   }}
                 >
-                  Rename
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                  startIcon={<DeleteIcon />}
-                  onClick={() => {
-                    closeMainModal();
-                    handleRemove(folder.folderId);
-                  }}
-                >
-                  Delete
-                </Button>
-              </Modal.Footer>
-            </Modal>
+                  {isRoot ? <></> : <MdCancel color="#EF0258" />}
+                </span>
+              </div>
 
-            <Modal show={open} onHide={closeModal}>
-              <Form onSubmit={handleSubmit}>
+              {/* MAIN MODAL */}
+              <Modal
+                show={openMain}
+                onHide={closeMainModal}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <Modal.Header>
+                  <Modal.Title>Choose Action</Modal.Title>
+                </Modal.Header>
                 <Modal.Body>
-                  <Form.Group>
-                    <Form.Label>Type New Folder Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      required
-                      value={newName}
-                      onChange={(e) => setNewName(e.target.value)}
-                    />
-                  </Form.Group>
+                  <b>
+                    <i>WARNING!!! </i>
+                  </b>
+                  Clicking on delete button will permanently delete your Folder
+                  from Drive.
                 </Modal.Body>
                 <Modal.Footer>
                   <Button
                     variant="contained"
                     startIcon={<HighlightOffIcon />}
-                    onClick={closeModal}
+                    onClick={closeMainModal}
                   >
                     Close
                   </Button>
                   <Button
-                    type="submit"
                     variant="contained"
                     style={{ backgroundColor: "#4AB7FF", marginLeft: "10px" }}
                     startIcon={<AccountCircleIcon />}
+                    onClick={() => {
+                      console.log("OPEN RENAME MODAL");
+                      closeMainModal();
+                      openModal();
+                    }}
                   >
                     Rename
                   </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      closeMainModal();
+                      handleRemove(folder.folderId);
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </Modal.Footer>
-              </Form>
-            </Modal>
-          </span>
-        );
-      })}
+              </Modal>
+
+              <Modal show={open} onHide={closeModal}>
+                <Form onSubmit={handleSubmit}>
+                  <Modal.Body>
+                    <Form.Group>
+                      <Form.Label>Type New Folder Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        required
+                        value={newName}
+                        onChange={(e) => setNewName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      variant="contained"
+                      startIcon={<HighlightOffIcon />}
+                      onClick={closeModal}
+                    >
+                      Close
+                    </Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      style={{ backgroundColor: "#4AB7FF", marginLeft: "10px" }}
+                      startIcon={<AccountCircleIcon />}
+                    >
+                      Rename
+                    </Button>
+                  </Modal.Footer>
+                </Form>
+              </Modal>
+            </span>
+          );
+        })}
+      </section>
     </section>
   ) : (
     <div>

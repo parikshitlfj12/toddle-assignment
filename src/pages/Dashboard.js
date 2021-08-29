@@ -33,12 +33,12 @@ export default function Dashboard() {
       <NavbarComponent />
       <Container className="mt-4">
         <Row>
-          <Col xs={10}>
+          <Col xs={10} className="mt-4">
             <Folder parentFolder={currentFolder} isRoot={isRoot}/>
             <hr />
             <File isRoot={isRoot}/>
           </Col>
-          <Col xs={2} style={{ textAlign: "right" }}>
+          <Col xs={2} style={{ textAlign: "right", marginTop: "5%" }}>
             <AddFolder parentFolder={currentFolder} isRoot={isRoot}/>
             <AddFile parentFolder={currentFolder} isRoot={isRoot}/>
           </Col>

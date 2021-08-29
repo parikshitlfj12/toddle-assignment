@@ -67,7 +67,7 @@ export default function File({isRoot}) {
                   handleRemove(oneFile.fileId);
                 }}
               >
-                <MdCancel color="#dc143c" style={{alt:"Delete", cursor:"pointer"}}/>
+                <MdCancel color="#EF0258" style={{ cursor:"pointer"}}/>
               </span>
             </span>
             <Modal centered show={open} onHide={closeModal}>
