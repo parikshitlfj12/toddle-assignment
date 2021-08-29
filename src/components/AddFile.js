@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
 import { AiFillFileText } from "react-icons/ai";
 import { FileContext } from "../contexts/fileContext";
+import Button from "@material-ui/core/Button";
 
-export default function AddFile({ parentFolder, isRoot }) {  
-  const {addFile} = useContext(FileContext);
-
+export default function AddFile({ parentFolder, isRoot }) {
+  const { addFile } = useContext(FileContext);
 
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -28,9 +28,16 @@ export default function AddFile({ parentFolder, isRoot }) {
   }
 
   return (
-    <section style={{display: "inline"}}>
-      <Button disabled={isRoot} onClick={openModal} className="mt-3" variant="outline-success">
-        <AiFillFileText fontSize="25px" />
+    <section style={{ margin: "0px 10px" }}>
+      <Button
+        variant="contained"
+        style={{ width: "165px", backgroundColor: "#4AB7FF", color: "white" }}
+        disabled={isRoot}
+        onClick={openModal}
+        className="mt-3"
+        startIcon={<AiFillFileText />}
+      >
+        Add File
       </Button>
       <Modal show={open} onHide={closeModal}>
         <Form onSubmit={handleSubmit}>
@@ -43,7 +50,7 @@ export default function AddFile({ parentFolder, isRoot }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <Form.Label style={{marginTop: "20px"}}>File Ext</Form.Label>
+              <Form.Label style={{ marginTop: "20px" }}>File Ext</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -53,10 +60,28 @@ export default function AddFile({ parentFolder, isRoot }) {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={closeModal}>
+            <Button
+              onClick={closeModal}
+              variant="contained"
+              style={{
+                width: "165px",
+                backgroundColor: "grey",
+                color: "white",
+              }}
+            >
               Close
             </Button>
-            <Button variant="success" type="submit">
+
+            <Button
+              variant="contained"
+              style={{
+                marginLeft: "10px",
+                width: "165px",
+                backgroundColor: "#4AB7FF",
+                color: "white",
+              }}
+              type="submit"
+            >
               Add File
             </Button>
           </Modal.Footer>
