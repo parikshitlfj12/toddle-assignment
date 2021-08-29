@@ -176,7 +176,7 @@ export default function Folder({ parentFolder, isRoot }) {
                     }
                   }}
                 >
-                  {isRoot ? <></> : <MdCancel color="#EF0258" />}
+                  {isRoot ? <></> : <MdCancel color="#8AD0FF" />}
                 </span>
               </div>
 
