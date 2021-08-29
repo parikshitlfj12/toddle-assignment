@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button as BootstrapButton, Modal, Form, Alert,  } from "react-bootstrap";
+import { Button as BootstrapButton, Modal, Form, Alert } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -48,9 +48,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Folder({ parentFolder, isRoot }) {
   const classes = useStyles();
 
+
   // Data
   const { folderId } = useParams();
-  const { getFoldersForAPage, getBreadCrumb, renameFolder } =
+  const { getFoldersForAPage, getBreadCrumb, renameFolder, folders } =
     useContext(FolderContext);
   const [currentPageFolders, setcurrentPageFolders] = useState([]);
   const [breadCrumbItems, setBreadCrumbItems] = useState([]);
@@ -77,7 +78,7 @@ export default function Folder({ parentFolder, isRoot }) {
   function closeMainModal() {
     setOpenMain(false);
   }
-  
+
   function closeDuplicateModal() {
     setDuplicate(false);
   }
@@ -99,18 +100,18 @@ export default function Folder({ parentFolder, isRoot }) {
   const checkDuplicate = () => {
     // currentPageFolders
     let flag = 0;
-    currentPageFolders.forEach(folder => {
-      if(folder.name === newName){
+    currentPageFolders.forEach((folder) => {
+      if (folder.name === newName) {
         flag = 1;
         return false;
       }
-    })
+    });
     return flag === 0 ? true : false;
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(checkDuplicate() === false){
+    if (checkDuplicate() === false) {
       setDuplicate(true);
       return;
     }
@@ -127,6 +128,19 @@ export default function Folder({ parentFolder, isRoot }) {
     setRenameId(folder.folderId);
   };
 
+  const breadCrumbnavigate = (folderName) => {
+    folders.forEach(folder => {
+      if(folderName === "/"){
+        history.push("null");
+        return;
+      }
+      if(folder.name === folderName){
+        history.push(folder.folderId);
+        return;
+      }
+    })
+  };
+
   // Return
   return currentPageFolders.length ? (
     <section>
@@ -138,18 +152,25 @@ export default function Folder({ parentFolder, isRoot }) {
         {breadCrumbItems.map((item) => {
           return item === "Root" ? (
             <StyledBreadcrumb
-                key={item}
-                label="Root"
-                icon={<HomeIcon style={{ fontSize: "15px" }} />}
-              />
+              component="a"
+              onClick={() => {breadCrumbnavigate(item)}}
+              label="Root"
+              icon={<HomeIcon style={{ fontSize: "15px" }} />}
+            />
           ) : (
-            <StyledBreadcrumb key={item} label={item} />
-          )
+            <StyledBreadcrumb
+              component="a"
+              key={item}
+              onClick={() => {breadCrumbnavigate(item)}}
+              label={item}
+              href={folderId}
+            />
+          );
         })}
       </Breadcrumbs>
 
       <br />
-      <section style={{marginTop: "10px"}}>
+      <section style={{ marginTop: "10px" }}>
         {currentPageFolders.map((folder) => {
           return (
             <span key={folder.folderId}>
@@ -284,25 +305,25 @@ export default function Folder({ parentFolder, isRoot }) {
           );
         })}
       </section>
-    
+
       <section>
         <Modal centered show={duplicate} onHide={closeDuplicateModal}>
-            <Modal.Body>
-              <Alert variant="danger">
-                <Alert.Heading>Folder Name Already Exist!</Alert.Heading>
-                <p>
-                  There Already Exist a Folder name in the directory.
-                  Please try to use a different Folder name
-                </p>
-              </Alert>
-            </Modal.Body>
-            <BootstrapButton
-              variant="outline-secondary"
-              onClick={closeDuplicateModal}
-              style={{margin: "-10px 10px 10px 10px"}}
-            >
-              Close
-            </BootstrapButton>
+          <Modal.Body>
+            <Alert variant="danger">
+              <Alert.Heading>Folder Name Already Exist!</Alert.Heading>
+              <p>
+                There Already Exist a Folder name in the directory. Please try
+                to use a different Folder name
+              </p>
+            </Alert>
+          </Modal.Body>
+          <BootstrapButton
+            variant="outline-secondary"
+            onClick={closeDuplicateModal}
+            style={{ margin: "-10px 10px 10px 10px" }}
+          >
+            Close
+          </BootstrapButton>
         </Modal>
       </section>
     </section>
@@ -316,13 +337,14 @@ export default function Folder({ parentFolder, isRoot }) {
         {breadCrumbItems.map((item) => {
           return item === "Root" ? (
             <StyledBreadcrumb
-                key={item}
-                label="Root"
-                icon={<HomeIcon style={{ fontSize: "15px" }} />}
-              />
+              key={item}
+              onClick={() => {breadCrumbnavigate(item)}}
+              label="Root"
+              icon={<HomeIcon style={{ fontSize: "15px" }} />}
+            />
           ) : (
-            <StyledBreadcrumb key={item} label={item} />
-          )
+            <StyledBreadcrumb key={item} label={item} onClick={() => {breadCrumbnavigate(item)}}/>
+          );
         })}
       </Breadcrumbs>
       <div className="mt-5">No Folders</div>
