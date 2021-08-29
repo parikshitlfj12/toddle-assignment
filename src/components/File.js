@@ -58,8 +58,7 @@ export default function File({isRoot}) {
             >
               <img src={fileImage} alt="File" width="5%" />
               <span style={{paddingLeft: "10px"}}>
-                {oneFile.name}.<small>{oneFile.ext}</small>.{" "}
-                <b>{oneFile.folderId}</b>
+                {oneFile.name}.<small>{oneFile.ext}</small>
               </span>
               <span
                 style={{ marginLeft: "15px", fontSize: "20px" }}

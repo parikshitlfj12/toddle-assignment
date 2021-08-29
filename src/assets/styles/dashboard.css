@@ -1,0 +1,177 @@
+.first-col{
+
+}
+
+
+.one{
+  text-align: center;
+  height: 100%;
+}
+
+.sideNav{
+  margin-top: 50px;
+}
+
+.sideNav div{
+  text-align: left;
+  padding-left: 15%;
+  margin-bottom: 10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.second-col{
+  margin-top: 10px;
+  border: 2px soild black;
+  border-radius: 30px;
+  background-color: #F6F9FF;
+  padding-right: 50px;
+}
+
+.third-col{
+
+}
+
+.second-files-folders{
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+
+#card {
+  font-family: "Segoe UI";
+   margin: 12vh auto;
+   border-radius: 5px;
+   overflow: hidden;
+   width: 450px;
+   padding: 15px 25px;
+   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+#card .personal {
+   display: flex;
+   justify-content: flex-start
+}
+
+#card .nameHolder h1 {
+   font-size: 30px;
+   margin: 0;
+}
+
+#card .nameHolder h2 {
+   margin: 0;
+   font-size: 15px;
+   color: grey;
+}
+
+#card .info {
+   display: flex;
+   justify-content: space-between;
+   padding: 20px 25px;
+   font-weight: lighter;
+   color: #3b3a3a;
+   font-size: 20px;
+}
+
+#card .info span {
+   border-bottom: 1px solid #cbcbcb;
+}
+
+#card .avatar img {
+   border-radius: 40px;
+   width: 60px;
+   height: 60px;
+   border: 5px solid #fff;
+   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+   margin-right: 25px;
+}
+
+#card .skills {
+   margin-bottom: 5px;
+}
+
+#card .skills span {
+   display: inline-block;
+   height: 32px;
+   font-size: 13px;
+   font-weight: 500;
+   color: rgba(0, 0, 0, 0.6);
+   line-height: 32px;
+   padding: 0 12px;
+   border-radius: 16px;
+   background-color: #e4e4e4;
+   margin-bottom: 5px;
+   margin-right: 5px;
+}
+
+#card .followers {
+   background-color: #f8f9f9;
+   margin: 0px -25px;
+   display: flex;
+   justify-content: space-around;
+   padding: 13px;
+   text-align: center;
+   color: #6e6e6e;
+   border-top: 1px solid #eaeaea;
+}
+
+#card .followers h1 {
+   font-weight: lighter;
+   margin: 0;
+   font-size: 15px;
+}
+
+#card .followers h2 {
+   margin: 0;
+   font-size: 17px;
+}
+
+#card .randomizeButton {
+   display: block;
+   background-color: #64bc7f;
+   text-decoration: none;
+   text-align: center;
+   margin: 0px -25px -15px -25px;
+   line-height: 60px;
+   color: #fff;
+   font-weight: bold;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+}
+
+#card .randomizeButton:hover {
+   background-color: #57aa70;
+}
+
+.animate-change {
+   animation-name: slide-in;
+   animation-duration: 0.3s;
+}
+
+@keyframes slide-in {
+   from {
+      margin-left: -50px;
+      opacity: 0.2;
+   }
+   to {
+      margin-left: 0px;
+      opacity: 1;
+   }
+}

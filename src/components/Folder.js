@@ -10,8 +10,6 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { FolderContext } from "../contexts/FolderContext";
 import { MdCancel } from "react-icons/md";
 import { useParams } from "react-router";
-import { Breadcrumb } from "react-bootstrap";
-import { HiBackspace } from "react-icons/hi";
 import folderImage from "../assets/img/folder.png";
 
 // Material UI
@@ -20,7 +18,6 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import HomeIcon from "@material-ui/icons/Home";
 import { emphasize, withStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 // Css styles
@@ -119,22 +116,19 @@ export default function Folder({ parentFolder, isRoot }) {
         />
         {breadCrumbItems.map((item) => {
           return item === "Root" ? (
-          <>
             <StyledBreadcrumb
+                key={item}
                 label="Root"
                 icon={<HomeIcon style={{ fontSize: "15px" }} />}
               />
-          </>
           ) : (
-          <>
             <StyledBreadcrumb key={item} label={item} />
-          </>
           )
         })}
       </Breadcrumbs>
 
       <br />
-      <section style={{marginTop: "20px"}}>
+      <section style={{marginTop: "10px"}}>
         {currentPageFolders.map((folder) => {
           return (
             <span key={folder.folderId}>
@@ -279,16 +273,13 @@ export default function Folder({ parentFolder, isRoot }) {
         />
         {breadCrumbItems.map((item) => {
           return item === "Root" ? (
-          <>
             <StyledBreadcrumb
+                key={item}
                 label="Root"
                 icon={<HomeIcon style={{ fontSize: "15px" }} />}
               />
-          </>
           ) : (
-          <>
             <StyledBreadcrumb key={item} label={item} />
-          </>
           )
         })}
       </Breadcrumbs>
